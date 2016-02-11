@@ -14,15 +14,15 @@ class Task
 
 
   def header
-    "#{time()} : #{title()}"
+    "#{owner} @ #{time()} <br> -- #{title()}"
   end
 
   def paragraph
-    "#{owner()} -- #{description()}"
+    description()
   end
 
   def self.all 
-    @@all_tasks.delete_if{|a| a.duration_invalid? }.sort{|a,b| b.time <=> a.time} 
+    @@all_tasks.delete_if{|a| a.duration_invalid? }.sort!{|a,b| b.time <=> a.time} 
     backup_list()
     @@all_tasks
   end
