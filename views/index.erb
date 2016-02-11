@@ -1,17 +1,62 @@
-<h1>To Do</h1>
+<!DOCTYPE html>
+<html>
+  <head>
+<style>
+body {
+      background-color: linen;
+}
+ul {
+  display: block;
+  list-style-type: disc;
+  margin-top: 1em;
+  margin-bottom: 1 em;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 40px;
+} 
+    </style>
+  </head>
+<h1>Welcome To The Systems Engineering Message Board</h1>
 
-<p>Here are all your tasks:</p>
+<h2>Messages:</h2>
 
 <ul>
     <% @tasks.each() do |task| %>
-          <li><%= task.description() %></li>
+      <article>
+        <h3><%="#{task.header}"%> </h3>
+        <p><%= " -> #{task.paragraph}" %></p> 
+      </article>
             <% end %>
 </ul>
-
-<p>Create a new task:</p>
+<br>
+<h2>Create a new message:</h2>
 
 <form action="/tasks" method="post">
-    <label for="description">Task Description</label>
-      <input id="description" name="description" type="text">
-        <button type="submit">Add task</button>
+  <div align="left">
+   <p>Message Title</p>
+  <input id="title" name="title" type="text">
+   <p>Message Description</p>
+  <textarea id="description" name="description" type="text" rows="4" cols="50"></textarea>
+  </div>
+  <div align="left">
+   <p>Message Owner</p>
+  <input id="owner" name="owner" type="text">
+  </div>
+  <div align="left">
+   <p>Message Priority</p>
+  <select id="priority" name="priority" >
+    <option value="High">High</option>
+    <option value="Medium">Medium</option>
+    <option value="Low">Low</option>
+  </select> 
+  </div>
+  <div align="left">
+   <p>Message Duration</p>
+  <select id="duration" name="duration" >
+    <option value="1 day">1 Day</option>
+    <option value="12 hours">12 Hours</option>
+    <option value="1 hour">1 Hour</option>
+  </select> 
+  </div>
+  <button type="submit">Add task</button>
 </form>

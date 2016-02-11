@@ -10,8 +10,12 @@ get("/") do
 end
 
 post("/tasks") do
-    description = params.fetch("description")
-      task = Task.new(description)
+      description = params.fetch("description")
+      owner = params.fetch('owner')
+      priority = params.fetch('priority')
+      duration = params.fetch('duration')
+      title = params.fetch('title')
+      task = Task.new(description, owner, priority,duration, title )
       task.save()
       erb(:success)
 end
