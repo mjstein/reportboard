@@ -19,4 +19,10 @@ post("/tasks") do
       task.save()
       redirect ('/')
 end
+
+post("/delete/:id") do
+  id = params[:id]
+  Task.delete(id)
+  redirect '/'
+end
 end

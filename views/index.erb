@@ -5,12 +5,15 @@
 
 <ul>
     <% @tasks.each() do |task| %>
-      <article>
+      <form action="/delete/<%=task.id%>" method="post">
+  <article> 
         <h3 style="color:<%="#{task.get_header_color}"%>"><%="#{task.header}"%> </h3>
 
         <p id="blogp"><%= "#{task.paragraph}" %></p> 
       </article>
-            <% end %>
+      <button  type="submit">Delete</button>
+      <% end %>
+</form>
 </ul>
 <br>
 <h2>Create a new message:</h2>

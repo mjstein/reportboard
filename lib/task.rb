@@ -1,9 +1,13 @@
 require 'yaml'
+require 'fileutils'
+require 'securerandom'
 class Task
+  FileUtils.mkpath('backup')
   @@backup_file='backup/list.dat'
   @@all_tasks = File.exists?(@@backup_file)? YAML::load(File.open(@@backup_file)):[]
 
   def initialize(description, owner, priority, duration, title) 
+    @id =SecureRandom.hex
     @description = description
     @owner = owner
     @priority = priority
@@ -30,7 +34,9 @@ class Task
     description()
   end
 
-
+  def id
+    @id 
+  end
 
   def self.all 
     @@all_tasks.delete_if{|a| a.duration_invalid? }.sort!{|a,b| b.time <=> a.time} 
@@ -50,9 +56,12 @@ class Task
     @@all_tasks = []
   end
 
+  def self.delete(id) 
+    @@all_tasks.delete_if {|a| a.id == id}
+    backup_list()
+  end
   def time
     @time.strftime("%m/%d/%Y %H:%M:%S")
-
   end
 
   def duration_invalid?
