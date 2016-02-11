@@ -1,5 +1,7 @@
+require 'yaml'
 class Task
-  @@all_tasks = []
+  @@backup_file='backup/list.dat'
+  @@all_tasks = File.exists?(@@backup_file)? YAML::load(File.open(@@backup_file)):[]
 
   def initialize(description, owner, priority, duration, title) 
     @description = description
@@ -21,6 +23,13 @@ class Task
 
   def self.all 
     @@all_tasks.delete_if{|a| a.duration_invalid? }.sort{|a,b| b.time <=> a.time} 
+    backup_list()
+    @@all_tasks
+  end
+
+  def self.backup_list
+    File.open(@@backup_file,'w'){ |file| file.write(YAML::dump(@@all_tasks)) }
+
   end
 
   def save 
