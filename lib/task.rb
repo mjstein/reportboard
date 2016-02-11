@@ -17,9 +17,20 @@ class Task
     "#{owner} @ #{time()} <br> -- #{title()}"
   end
 
+  def get_header_color
+    case @priority
+    when 'Medium'
+      'green'
+    when 'High'
+      'red'
+    end
+  end
+
   def paragraph
     description()
   end
+
+
 
   def self.all 
     @@all_tasks.delete_if{|a| a.duration_invalid? }.sort!{|a,b| b.time <=> a.time} 
@@ -29,7 +40,6 @@ class Task
 
   def self.backup_list
     File.open(@@backup_file,'w'){ |file| file.write(YAML::dump(@@all_tasks)) }
-
   end
 
   def save 

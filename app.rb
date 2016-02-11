@@ -17,6 +17,6 @@ post("/tasks") do
       title = params.fetch('title')
       task = Task.new(description, owner, priority,duration, title )
       task.save()
-      erb(:success)
+      redirect ('/')
 end
 end
