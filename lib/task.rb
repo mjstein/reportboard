@@ -1,23 +1,23 @@
 class Task
   @@all_tasks = []
 
-  define_method(:initialize) do |description|
+  def initialize(description) 
     @description = description
   end
 
-  define_method(:description) do
+  def description 
     @description
   end
 
-  define_singleton_method(:all) do
+  def self.all 
     @@all_tasks
   end
 
-  define_method(:save) do
+  def save 
     @@all_tasks.push(self)
   end
 
-  define_singleton_method(:clear) do
+  def self.clear 
     @@all_tasks = []
   end
 end
