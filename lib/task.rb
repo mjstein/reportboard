@@ -5,9 +5,9 @@ class Task
     @description = description
     @owner = owner
     @priority = priority
-    @duration = duration
     @title = title
-    @time=Time.now.strftime("%m/%d/%Y %H:%M:%S")
+    @time=Time.now
+    @expiry_time = @time + duration.to_i
   end
 
 
@@ -20,7 +20,7 @@ class Task
   end
 
   def self.all 
-    @@all_tasks.sort{|a,b| b.time <=> a.time}
+    @@all_tasks.delete_if{|a| a.duration_invalid? }.sort{|a,b| b.time <=> a.time} 
   end
 
   def save 
@@ -32,10 +32,16 @@ class Task
   end
 
   def time
-    @time 
+    @time.strftime("%m/%d/%Y %H:%M:%S")
+
+  end
+
+  def duration_invalid?
+    Time.now > @expiry_time 
   end
 
   private
+  
   def description 
     @description
   end
@@ -52,8 +58,6 @@ class Task
     @priority
   end
 
-  def duration_valid
-    @duration
-  end
+
 
 end
