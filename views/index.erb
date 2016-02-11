@@ -2,9 +2,6 @@
 <html>
   <head>
 <style>
-body {
-      background-color: linen;
-}
 ul {
   display: block;
   list-style-type: disc;
@@ -13,7 +10,37 @@ ul {
   margin-left: 0;
   margin-right: 0;
   padding-left: 40px;
-} 
+}
+h1 {
+  color: black;
+  letter-spacing: 2px;
+  font-family: "Times New Roman";
+}
+
+h2 {
+  color: grey;
+  letter-spacing: 2px;
+  font-family: "Times New Roman";
+}
+
+h3 {
+  color: grey;
+  letter-spacing: 2px;
+  font-family: "Times New Roman";
+}
+p {
+  color: grey;
+  letter-spacing: 2px;
+  font-family: "Times New Roman";
+}
+
+#blogp{
+  color: grey;
+  font-size:90%;
+  font-family: "Times New Roman";
+  font-style: italic
+}
+
     </style>
   </head>
 <h1>Welcome To The Systems Engineering Message Board</h1>
@@ -24,7 +51,7 @@ ul {
     <% @tasks.each() do |task| %>
       <article>
         <h3><%="#{task.header}"%> </h3>
-        <p><%= " -> #{task.paragraph}" %></p> 
+        <p id="blogp"><%= " -> #{task.paragraph}" %></p> 
       </article>
             <% end %>
 </ul>

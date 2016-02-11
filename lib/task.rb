@@ -7,8 +7,35 @@ class Task
     @priority = priority
     @duration = duration
     @title = title
+    @time=Time.now.strftime("%m/%d/%Y %H:%M:%S")
   end
 
+
+  def header
+    "#{time()}: #{title()}"
+  end
+
+  def paragraph
+    "#{owner()} -- #{description()}"
+  end
+
+  def self.all 
+    @@all_tasks.sort{|a,b| b.time <=> a.time}
+  end
+
+  def save 
+    @@all_tasks.push(self)
+  end
+
+  def self.clear 
+    @@all_tasks = []
+  end
+
+  def time
+    @time 
+  end
+
+  private
   def description 
     @description
   end
@@ -25,31 +52,8 @@ class Task
     @priority
   end
 
-  def duration
+  def duration_valid
     @duration
   end
 
-  def time
-    Time.now
-  end
-
-  def header
-    "#{time()}: #{title()}"
-  end
-
-  def paragraph
-    "#{owner()} -- #{description()}"
-  end
-
-  def self.all 
-    @@all_tasks
-  end
-
-  def save 
-    @@all_tasks.push(self)
-  end
-
-  def self.clear 
-    @@all_tasks = []
-  end
 end
