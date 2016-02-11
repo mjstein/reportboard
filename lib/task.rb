@@ -12,7 +12,7 @@ class Task
 
 
   def header
-    "#{time()}: #{title()}"
+    "#{time()} : #{title()}"
   end
 
   def paragraph
