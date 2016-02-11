@@ -41,23 +41,10 @@ class Task
   end
 
   private
-  
-  def description 
-    @description
+
+  ["description", "title", "owner","priority"].each do |name|
+    define_method(name) do
+      instance_variable_get("@#{name}")
+    end
   end
-
-  def title 
-    @title
-  end
-
-  def owner
-    @owner
-  end
-
-  def priority
-    @priority
-  end
-
-
-
 end
