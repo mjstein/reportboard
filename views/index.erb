@@ -3,18 +3,21 @@
 
 <h2>Messages:</h2>
 
+<hr style="color:lightblue">
 <ul>
     <% @tasks.each() do |task| %>
       <form action="/delete/<%=task.id%>" method="post">
   <article> 
         <h3 style="color:<%="#{task.get_header_color}"%>"><%="#{task.header}"%> </h3>
 
-        <p id="blogp"><%= "#{task.paragraph}" %></p> 
+        <p id="blogp"><%= "#{task.paragraph.gsub("\n",'<br>')}" %></p> 
+      <button  type="submit" style="background-color: lightblue; color: floralwhite; border:none; font-size: 16px;padding: 15px 32px; display: inline-clock;cursor:pointer">Delete</button>
       </article>
-      <button  type="submit">Delete</button>
       <% end %>
 </form>
 </ul>
+<br>
+<hr style="color:lightblue">
 <br>
 <h2>Create a new message:</h2>
 
@@ -45,6 +48,7 @@
     <option value=43200>12 Hours</option>
     <option value=86400>1 Day</option>
   </select> 
-  </div>
+</div>
+<br>
   <button type="submit">Add task</button>
 </form>
