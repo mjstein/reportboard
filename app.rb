@@ -6,7 +6,7 @@ require("./lib/task")
 class SystemsEngineering < Sinatra::Base
 get("/") do
     @tasks = Task.all()
-      erb(:index)
+      haml(:index)
 end
 
 post("/tasks") do

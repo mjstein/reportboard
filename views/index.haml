@@ -1,0 +1,42 @@
+!!!
+%html
+  %body
+    %h1 Welcome To The Systems Engineering Message Board
+    %h2 Messages:
+    %hr{:style => "color:lightblue"}/
+    %ul
+      - @tasks.each() do |task|
+        %form{:action => "/delete/#{task.id}", :method => "post"}
+          %article
+            %h3{:style => "color:#{"#{task.get_header_color}"}"}
+              = "#{task.header}"
+            %p#blogp= "#{task.paragraph.gsub("\n",'<br>')}"
+            %button{:style => "background-color: lightblue; color: floralwhite; border:none; font-size: 16px;padding: 15px 32px; display: inline-clock;cursor:pointer", :type => "submit"} Delete
+    %br/
+    %hr{:style => "color:lightblue"}/
+    %br/
+    %h2 Create a new message:
+    %form{:action => "/tasks", :method => "post"}
+      %div{:align => "left"}
+        %p Message Title
+        %input#title{:name => "title", :type => "text"}/
+        %p Message Description
+        %textarea#description{:cols => "50", :name => "description", :rows => "4", :type => "text"}
+      %div{:align => "left"}
+        %p Message Owner
+        %input#owner{:name => "owner", :type => "text"}/
+      %div{:align => "left"}
+        %p Message Priority
+        %select#priority{:name => "priority"}
+          %option{:value => "Low"} Low
+          %option{:value => "Medium"} Medium
+          %option{:value => "High"} High
+      %div{:align => "left"}
+        %p Message Duration
+        %select#duration{:name => "duration"}
+          %option{:value => "10800"} 3 Hours
+          %option{:value => "43200"} 12 Hours
+          %option{:value => "86400"} 1 Day
+          %option{:value => "259200"} 3 Day
+      %br/
+      %button{:type => "submit"} Add task
